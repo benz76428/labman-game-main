@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ThickHideMutation" load_steps=3 format=3 uid="uid://4efsnv3e421h"]
+
+[ext_resource type="Texture2D" uid="uid://bmqbqtoh5aykd" path="res://icon.svg" id="1_1wjqb"]
+[ext_resource type="Script" uid="uid://b3j1br8hcyw0j" path="res://Scripts/mutations/health upgrade/thick_hide_mutation.gd" id="1_sisqo"]
+
+[resource]
+script = ExtResource("1_sisqo")
+mutation_name = "Thick Hide"
+description = "Increase HP by 25"
+icon = ExtResource("1_1wjqb")
+metadata/_custom_type_script = "uid://d10136xog8ydo"

@@ -1,0 +1,36 @@
+[gd_scene load_steps=5 format=3 uid="uid://be3h6rh1gcf50"]
+
+[ext_resource type="Script" uid="uid://p6qs2n52c0ut" path="res://Scenes/Mutation Picker/mutation_picker.gd" id="1_stqne"]
+[ext_resource type="Script" uid="uid://4t87huefrkpe" path="res://Scripts/Mutations/mutation.gd" id="2_n03u0"]
+[ext_resource type="Resource" uid="uid://4efsnv3e421h" path="res://Scripts/mutations/health upgrade/minor_health_dna.tres" id="3_7kc2t"]
+[ext_resource type="Resource" uid="uid://d2yih0xomj1po" path="res://Scenes/Weapons/milk shooter/milk_nipples_dna.tres" id="4_7kc2t"]
+
+[node name="MutationPicker" type="CanvasLayer"]
+process_mode = 3
+script = ExtResource("1_stqne")
+possible_mutations = Array[ExtResource("2_n03u0")]([ExtResource("3_7kc2t"), ExtResource("4_7kc2t")])
+
+[node name="ColorRect" type="ColorRect" parent="."]
+visibility_layer = 512
+offset_right = 852.0
+offset_bottom = 479.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+color = Color(0.050980393, 0.050980393, 0.050980393, 0.23137255)
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ColorRect"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
