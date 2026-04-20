@@ -1,23 +1,24 @@
 extends CharacterBody2D
 
-var health = 5
-
+@export var max_health: int = 5
+@export var speed: float = 50 
+@export var damage_amount: int = 10
+@export var attack_cooldown: float = 1.0 
+var can_attack: bool = true
+var current_health: int
 
 const DNA_DROP = preload("res://Scenes/xp/dna_drop.tscn") 
 
 @onready var player = get_tree().get_first_node_in_group("player")
-@export var damage_amount: int = 10
-@export var attack_cooldown: float = 1.0 
-var can_attack: bool = true
-
 func _ready():
 	%Slime.play_walk()
+	current_health = max_health
 	
 func _physics_process(delta: float) -> void:
 	if player == null:
 		return
 	var direction = global_position.direction_to(player.global_position)
-	velocity = direction * 50
+	velocity = direction * speed
 	move_and_slide()
 	for i in get_slide_collision_count():
 		var collision = get_slide_collision(i)
@@ -36,10 +37,10 @@ func trigger_attack_cooldown() -> void:
 	can_attack = true
 	
 func take_damage():
-	health -= 1
+	current_health -= 1
 	%Slime.play_hurt()
 	
-	if health <= 0:
+	if current_health <= 0:
 
 		$Hitbox.set_deferred("disabled", true)
 
