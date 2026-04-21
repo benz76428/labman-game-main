@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://blhurklnyjvk4"]
+
+[ext_resource type="Script" uid="uid://cfg6nj728gdxb" path="res://Scenes/Enemies/Enemy Projectile/enemy_projectile.gd" id="1_fplyy"]
+[ext_resource type="Texture2D" uid="uid://brgpjilf7s2ul" path="res://Scenes/Weapons/pistol/muzzle_flash/muzzle_flash.png" id="2_df0ks"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_e83gl"]
+radius = 16.03122
+
+[node name="EnemyProjectile" type="Area2D"]
+scale = Vector2(0.565643, 0.58667797)
+script = ExtResource("1_fplyy")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+rotation = 3.130892
+texture = ExtResource("2_df0ks")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_e83gl")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

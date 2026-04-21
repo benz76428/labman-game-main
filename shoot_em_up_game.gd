@@ -8,6 +8,10 @@ var enemy_spawn_chances = [
 	{
 		"scene": preload("res://Scenes/Enemies/Test_fast_slime/fast_mob.tscn"), 
 		"weight": 20.0 #chance
+	},
+	{
+		"scene": preload("res://Scenes/Enemies/Fire Slinger/fire_slinger.tscn"), 
+		"weight": 20.0 #chance
 	}
 ]
 func spawn_mob():

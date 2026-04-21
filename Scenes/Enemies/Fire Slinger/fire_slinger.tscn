@@ -1,0 +1,22 @@
+[gd_scene load_steps=5 format=3 uid="uid://d05v2pjxph6st"]
+
+[ext_resource type="Script" uid="uid://uk66cudh83fg" path="res://ranged_enemy.gd" id="1_y5oqy"]
+[ext_resource type="PackedScene" uid="uid://ogik4s70pgwl" path="res://Scenes/Enemies/base_slime/slime.tscn" id="2_o41p3"]
+[ext_resource type="PackedScene" uid="uid://blhurklnyjvk4" path="res://Scenes/Enemies/Enemy Projectile/enemy_projectile.tscn" id="2_utyy5"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ddotj"]
+radius = 55.00909
+
+[node name="fire_slinger" type="CharacterBody2D"]
+scale = Vector2(0.15742107, 0.15030457)
+script = ExtResource("1_y5oqy")
+projectile_scene = ExtResource("2_utyy5")
+
+[node name="Slime" parent="." instance=ExtResource("2_o41p3")]
+unique_name_in_owner = true
+modulate = Color(1, 0.1882353, 0.15686275, 1)
+position = Vector2(12.279884, -4.2471085)
+
+[node name="Hitbox" type="CollisionShape2D" parent="."]
+position = Vector2(13, -31)
+shape = SubResource("CircleShape2D_ddotj")
