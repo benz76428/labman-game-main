@@ -1,14 +1,16 @@
-[gd_scene load_steps=5 format=3 uid="uid://be3h6rh1gcf50"]
+[gd_scene load_steps=7 format=3 uid="uid://be3h6rh1gcf50"]
 
 [ext_resource type="Script" uid="uid://p6qs2n52c0ut" path="res://Scenes/Mutation Picker/mutation_picker.gd" id="1_stqne"]
 [ext_resource type="Script" uid="uid://4t87huefrkpe" path="res://Scripts/Mutations/mutation.gd" id="2_n03u0"]
-[ext_resource type="Resource" uid="uid://4efsnv3e421h" path="res://Scripts/mutations/health upgrade/minor_health_dna.tres" id="3_7kc2t"]
+[ext_resource type="Resource" uid="uid://4efsnv3e421h" path="res://Scripts/Mutations/health upgrade/minor_health_dna.tres" id="3_7kc2t"]
 [ext_resource type="Resource" uid="uid://d2yih0xomj1po" path="res://Scenes/Weapons/milk shooter/milk_nipples_dna.tres" id="4_7kc2t"]
+[ext_resource type="Resource" uid="uid://dagu2cep6ge37" path="res://Scripts/Mutations/fast feet/fast_feet_dna.tres" id="5_3d1f4"]
+[ext_resource type="Resource" uid="uid://brj530n0j7srx" path="res://Scripts/Mutations/damage increase/combat_stim_dna.tres" id="6_8efn2"]
 
 [node name="MutationPicker" type="CanvasLayer"]
 process_mode = 3
 script = ExtResource("1_stqne")
-possible_mutations = Array[ExtResource("2_n03u0")]([ExtResource("3_7kc2t"), ExtResource("4_7kc2t")])
+possible_mutations = Array[ExtResource("2_n03u0")]([ExtResource("3_7kc2t"), ExtResource("4_7kc2t"), ExtResource("5_3d1f4"), ExtResource("6_8efn2")])
 
 [node name="ColorRect" type="ColorRect" parent="."]
 visibility_layer = 512

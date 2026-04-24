@@ -40,10 +40,10 @@ func shoot(direction: Vector2):
 	await get_tree().create_timer(fire_rate).timeout
 	can_shoot = true
 
-func take_damage():
-	current_health -= 1
+func take_damage(amount):
+	current_health -= amount
 	%Slime.play_hurt()
-	
+	print("Enemy took ", amount, " damage! Health left: ", current_health)
 	if current_health <= 0:
 
 		$Hitbox.set_deferred("disabled", true)

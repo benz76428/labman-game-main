@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="CombatStimMutation" load_steps=2 format=3 uid="uid://brj530n0j7srx"]
+
+[ext_resource type="Script" uid="uid://bpuiyvxx3aamk" path="res://Scripts/Mutations/damage increase/combat_stim_mutation.gd" id="1_ovlip"]
+
+[resource]
+script = ExtResource("1_ovlip")
+mutation_name = "Magical Needle"
+description = "Increases all the damage you deal"
+metadata/_custom_type_script = "uid://bpuiyvxx3aamk"

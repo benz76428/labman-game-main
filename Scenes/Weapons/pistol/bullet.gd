@@ -1,6 +1,7 @@
 extends Area2D
 
 var travalled_distance = 0
+var damage: float = 0.0
 
 func _physics_process(delta: float) -> void:
 	const SPEED = 1000
@@ -20,6 +21,6 @@ func _on_body_entered(body: Node2D) -> void:
 	set_deferred("monitoring", false) 
 	
 	if body.has_method("take_damage"):
-		body.take_damage()
+		body.take_damage(damage)
 	
 	queue_free()

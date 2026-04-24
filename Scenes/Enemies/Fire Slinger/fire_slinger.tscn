@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://d05v2pjxph6st"]
 
-[ext_resource type="Script" uid="uid://uk66cudh83fg" path="res://ranged_enemy.gd" id="1_y5oqy"]
+[ext_resource type="Script" uid="uid://uk66cudh83fg" path="res://Scenes/Enemies/ranged_enemy.gd" id="1_y5oqy"]
 [ext_resource type="PackedScene" uid="uid://ogik4s70pgwl" path="res://Scenes/Enemies/base_slime/slime.tscn" id="2_o41p3"]
 [ext_resource type="PackedScene" uid="uid://blhurklnyjvk4" path="res://Scenes/Enemies/Enemy Projectile/enemy_projectile.tscn" id="2_utyy5"]
 

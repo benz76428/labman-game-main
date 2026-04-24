@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="FastFeetMutation" load_steps=2 format=3 uid="uid://dagu2cep6ge37"]
+
+[ext_resource type="Script" uid="uid://bvwqqlsucxuuc" path="res://Scripts/Mutations/fast feet/fast_feet_mutation.gd" id="1_oiisj"]
+
+[resource]
+script = ExtResource("1_oiisj")
+mutation_name = "Fast Feet"
+description = "Increases Movement Speed"
+metadata/_custom_type_script = "uid://bvwqqlsucxuuc"

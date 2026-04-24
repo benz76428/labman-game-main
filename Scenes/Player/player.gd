@@ -19,6 +19,7 @@ var health: int = max_health
 @export var base_fire_rate_mult: float = 1.0
 @export var base_damage_mult: float = 1.0
 
+
 # ==========================================
 # CURRENT STATS (Base stats + Mutation modifiers)
 # ==========================================

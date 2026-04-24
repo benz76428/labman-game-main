@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-@export var max_health: int = 5
+@export var max_health: int = 10
 @export var speed: float = 50 
 @export var damage_amount: int = 10
 @export var attack_cooldown: float = 1.0 
@@ -36,10 +36,10 @@ func trigger_attack_cooldown() -> void:
 	
 	can_attack = true
 	
-func take_damage():
-	current_health -= 1
+func take_damage(amount:float):
+	current_health -= amount
 	%Slime.play_hurt()
-	
+	print("Enemy took ", amount, " damage! Health left: ", current_health)
 	if current_health <= 0:
 
 		$Hitbox.set_deferred("disabled", true)
