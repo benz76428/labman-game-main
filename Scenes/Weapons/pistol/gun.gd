@@ -14,7 +14,7 @@ func _physics_process(delta: float) -> void:
 func shoot(aim_dir: Vector2) -> void:
 	# ONLY shoot if the cooldown timer is at or below zero
 	var final_damage = base_damage
-	if owner and "damage_multiplier" in owner:
+	if owner and "base_damage_mult" in owner:
 		final_damage = base_damage * owner.base_damage_mult
 	
 	if fire_timer <= 0:

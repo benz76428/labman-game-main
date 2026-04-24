@@ -9,7 +9,7 @@ func _physics_process(delta: float) -> void:
 
 func shoot(aim_direction: Vector2) -> void:
 	var final_damage = base_damage
-	if owner and "damage_multiplier" in owner:
+	if owner and "base_damage_mult" in owner:
 		final_damage = base_damage * owner.base_damage_mult
 		
 	if not can_shoot or projectile_scene == null: 
