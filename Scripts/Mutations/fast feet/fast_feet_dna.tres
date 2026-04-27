@@ -6,5 +6,5 @@
 script = ExtResource("1_oiisj")
 mutation_name = "Fast Feet"
 target_stat = "10"
-base_value = 0.5
+base_value = 1.0
 metadata/_custom_type_script = "uid://bvwqqlsucxuuc"

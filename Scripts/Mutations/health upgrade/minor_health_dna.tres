@@ -7,3 +7,4 @@ script = ExtResource("1_sisqo")
 health_increase = 5000
 mutation_name = "Thick Hide"
 target_stat = "10"
+base_value = 100.0

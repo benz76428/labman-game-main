@@ -2,7 +2,7 @@ extends BaseWeapon # <-- Now it inherits all the auto-targeting logic!
 
 # Make sure this matches your marker node name (e.g., $Muzzle, $Marker2D, etc.)
 # If you have two muzzles (since it's plural!), let me know and we can make it shoot from both!
-@onready var muzzle = $Muzzle 
+@onready var muzzle = $%ShootingPoint 
 
 # This overrides the blank function in the base class!
 func shoot(target: Node2D):

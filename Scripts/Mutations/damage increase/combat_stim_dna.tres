@@ -6,4 +6,5 @@
 script = ExtResource("1_ovlip")
 mutation_name = "Combat Stimulant"
 mutation_description = "Increase Damage Dealt"
+base_value = 2.0
 metadata/_custom_type_script = "uid://bpuiyvxx3aamk"
