@@ -1,30 +1,27 @@
-extends BaseWeapon
+extends BaseWeapon # <-- Notice it extends our new class!
 
-var fire_timer: float = 0.0
-@export var base_damage: float = 1.0
+@onready var muzzle = $%ShootingPoint # Assuming you have a Marker2D node called Muzzle
 
-func _physics_process(delta: float) -> void:
-	# Always point at the mouse
-	look_at(get_global_mouse_position())
-	
-	# Count down the cooldown
-	if fire_timer > 0:
-		fire_timer -= delta
+# This overrides the blank function in the base class!
+func shoot(target: Node2D):
+	if not projectile_scene: 
+		print("ERROR: No bullet scene attached to gun!")
+		return
 		
-func shoot(aim_dir: Vector2) -> void:
-	# ONLY shoot if the cooldown timer is at or below zero
+	var new_bullet = projectile_scene.instantiate()
+	
+	# Point the gun exactly at the closest enemy!
+	look_at(target.global_position)
+	
+	# Calculate damage using the player's dictionary
 	var final_damage = base_damage
-	if owner and "base_damage_mult" in owner:
-		final_damage = base_damage * owner.base_damage_mult
+	if player and player.has_method("get_stat"):
+		final_damage = base_damage * player.get_stat("damage_multiplier")
 	
-	if fire_timer <= 0:
-		const BULLET = preload("res://Scenes/Weapons/pistol/bullet.tscn")
-		var new_bullet = BULLET.instantiate()
-		new_bullet.damage = final_damage
-		new_bullet.global_position = %ShootingPoint.global_position 
-		new_bullet.global_rotation = %ShootingPoint.global_rotation 
-		
-		# Add to the main scene tree
-		get_tree().current_scene.add_child(new_bullet)
-
-		fire_timer = fire_rate
+	# Set up the bullet
+	new_bullet.damage = final_damage
+	new_bullet.global_position = muzzle.global_position
+	new_bullet.rotation = global_rotation
+	
+	# Add the bullet to the world
+	get_tree().current_scene.add_child(new_bullet)

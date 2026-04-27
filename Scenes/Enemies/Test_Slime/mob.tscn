@@ -6,7 +6,7 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_nokgg"]
 radius = 54.0
 
-[node name="Mob" type="CharacterBody2D"]
+[node name="Mob" type="CharacterBody2D" groups=["enemy"]]
 scale = Vector2(0.2, 0.2)
 collision_layer = 3
 script = ExtResource("1_xg2pg")

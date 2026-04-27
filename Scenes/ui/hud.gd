@@ -20,7 +20,7 @@ func _ready() -> void:
 		
 		# --- Health Setup ---
 		player.health_changed.connect(update_health_bar)
-		update_health_bar(player.current_health, player.max_health)
+		update_health_bar(player.current_health, player.get_stat("max_health"))
 	else:
 		print("ERROR: HUD could not find the Player in the 'player' group!")
 

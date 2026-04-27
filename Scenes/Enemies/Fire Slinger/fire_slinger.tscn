@@ -7,8 +7,9 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_ddotj"]
 radius = 55.00909
 
-[node name="fire_slinger" type="CharacterBody2D"]
+[node name="fire_slinger" type="CharacterBody2D" groups=["enemy"]]
 scale = Vector2(0.15742107, 0.15030457)
+collision_layer = 3
 script = ExtResource("1_y5oqy")
 projectile_scene = ExtResource("2_utyy5")
 

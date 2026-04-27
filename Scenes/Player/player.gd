@@ -14,9 +14,7 @@ const MUTATION_PICKER_SCENE = preload("res://Scenes/Mutation Picker/mutation_pic
 	"max_health": 100.0,
 	"speed": 300.0,
 	"speed_multiplier": 1.0,
-	"damage_multiplier": 1.0,
-	"projectile_count": 1.0,     
-	"pierce": 0.0,               
+	"damage_multiplier": 1.0,           
 	"pickup_radius": 50.0,     
 	"crit_chance": 0.0
 }
@@ -30,7 +28,8 @@ var level: int = 1
 var current_xp: int = 0
 var xp_to_next_level: int = 5 # How much DNA you need to hit Level 2
 
-
+var weapon
+var is_attacking: bool = false
 func _ready():
 	# 1. Copy the base stats to our active stats on spawn
 	current_stats = base_stats.duplicate()
@@ -80,7 +79,7 @@ func die():
 	# get_tree().reload_current_scene() 
 
 # Enemies call this when they die and drop DNA
-func add_xp(amount: int):
+func gain_xp(amount: int):
 	current_xp += amount
 	xp_changed.emit(current_xp, xp_to_next_level)
 	

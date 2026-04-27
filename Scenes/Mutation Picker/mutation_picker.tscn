@@ -10,7 +10,7 @@
 [node name="MutationPicker" type="CanvasLayer"]
 process_mode = 3
 script = ExtResource("1_stqne")
-possible_mutations = Array[ExtResource("2_n03u0")]([ExtResource("3_7kc2t"), ExtResource("4_7kc2t"), ExtResource("5_3d1f4"), ExtResource("6_8efn2")])
+possible_mutations = Array[ExtResource("2_n03u0")]([ExtResource("6_8efn2"), ExtResource("3_7kc2t"), ExtResource("4_7kc2t"), ExtResource("5_3d1f4")])
 
 [node name="ColorRect" type="ColorRect" parent="."]
 visibility_layer = 512

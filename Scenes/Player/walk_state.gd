@@ -8,7 +8,9 @@ func _on_physics_process(_delta: float) -> void:
 	var direction: Vector2 = Input.get_vector("walk_left", "walk_right", "walk_up", "walk_down")
 	
 	if player:
-		# Read the stats dynamically from the dictionary using our new get_stat() function
+		if direction != Vector2.ZERO:
+			player.player_direction = direction
+			
 		var current_speed = player.get_stat("speed")
 		var current_mult = player.get_stat("speed_multiplier")
 		
