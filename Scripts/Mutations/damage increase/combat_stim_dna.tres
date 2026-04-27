@@ -6,4 +6,7 @@
 script = ExtResource("1_ovlip")
 mutation_name = "Magical Needle"
 description = "Increases all the damage you deal"
+max_level = 10
+base_value = 0.5
+upgrade_value = 0.25
 metadata/_custom_type_script = "uid://bpuiyvxx3aamk"

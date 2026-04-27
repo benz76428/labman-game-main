@@ -1,14 +1,16 @@
 extends Mutation
 class_name FastFeetMutation
 
-@export var speed_increase: float = 50.0
-
-
 func apply_mutation(player: Node2D):
-	# Assuming your player script has a 'speed' or 'SPEED' variable
-	if "base_speed" in player:
-		player.base_speed += speed_increase
-	elif "BASE_SPEED" in player:
-		player.base_SPEED += speed_increase
+	if current_level >= max_level:
+		return # Stop if it's already maxed out
 		
-	print("Player speed increased by ", speed_increase)
+	# 1. Simply decide which value to use in one line of code
+	var amount_to_add = base_value if current_level == 0 else upgrade_value
+	
+	# 2. Apply it to the player
+	if "speed_multiplier" in player:
+		player.speed_multiplier += amount_to_add
+		
+	# 3. Increase the level
+	current_level += 1

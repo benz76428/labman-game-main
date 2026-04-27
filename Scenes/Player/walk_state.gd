@@ -4,11 +4,17 @@ extends NodeState
 @export var animated_sprite_2d: AnimatedSprite2D
 
 func _on_physics_process(_delta: float) -> void:
+	# Get the input direction
 	var direction: Vector2 = Input.get_vector("walk_left", "walk_right", "walk_up", "walk_down")
 	
-	# ONLY set walk velocity if we are not currently dashing
-	if not player.is_dashing:
-		player.velocity = direction * player.base_speed
+	if player:
+		# Read the stats dynamically from the dictionary using our new get_stat() function
+		var current_speed = player.get_stat("speed")
+		var current_mult = player.get_stat("speed_multiplier")
+		
+		# Apply the math
+		player.velocity = direction * (current_speed * current_mult)
+		player.move_and_slide()
 	
 	# Animation Logic
 	var anim_name = "walk_front"

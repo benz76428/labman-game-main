@@ -39,7 +39,6 @@ func trigger_attack_cooldown() -> void:
 func take_damage(amount:float):
 	current_health -= amount
 	%Slime.play_hurt()
-	print("Enemy took ", amount, " damage! Health left: ", current_health)
 	if current_health <= 0:
 
 		$Hitbox.set_deferred("disabled", true)

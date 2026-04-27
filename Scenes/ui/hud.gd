@@ -16,11 +16,11 @@ func _ready() -> void:
 		player.level_changed.connect(_update_level_label)
 		
 		_update_xp_bar(player.current_xp, player.xp_to_next_level)
-		_update_level_label(player.current_level)
+		_update_level_label(player.level)
 		
 		# --- Health Setup ---
 		player.health_changed.connect(update_health_bar)
-		update_health_bar(player.health, player.max_health)
+		update_health_bar(player.current_health, player.max_health)
 	else:
 		print("ERROR: HUD could not find the Player in the 'player' group!")
 
