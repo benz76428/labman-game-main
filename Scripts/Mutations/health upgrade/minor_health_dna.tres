@@ -1,10 +1,9 @@
-[gd_resource type="Resource" script_class="ThickHideMutation" load_steps=2 format=3 uid="uid://4efsnv3e421h"]
+[gd_resource type="Resource" script_class="Mutation" load_steps=2 format=3 uid="uid://4efsnv3e421h"]
 
-[ext_resource type="Script" uid="uid://b3j1br8hcyw0j" path="res://Scripts/Mutations/health upgrade/thick_hide_mutation.gd" id="1_sisqo"]
+[ext_resource type="Script" uid="uid://4t87huefrkpe" path="res://Scripts/Mutations/mutation.gd" id="1_ufdah"]
 
 [resource]
-script = ExtResource("1_sisqo")
-health_increase = 5000
+script = ExtResource("1_ufdah")
 mutation_name = "Thick Hide"
-target_stat = "10"
-base_value = 100.0
+target_stat = "max_health"
+base_value = 10.0

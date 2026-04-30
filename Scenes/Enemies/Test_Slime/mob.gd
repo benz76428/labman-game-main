@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-@export var max_health: int = 5
+@export var max_health: int = 10
 @export var speed: float = 50 
 @export var damage_amount: int = 10
 @export var attack_cooldown: float = 1.0 
@@ -8,7 +8,7 @@ var can_attack: bool = true
 var current_health: int
 
 const DNA_DROP = preload("res://Scenes/xp/dna_drop.tscn") 
-
+const DAMAGE_NUMBER = preload("res://Scenes/ui/damage_number.tscn")
 @onready var player = get_tree().get_first_node_in_group("player")
 func _ready():
 	%Slime.play_walk()
@@ -31,7 +31,8 @@ func _physics_process(delta: float) -> void:
 			
 func trigger_attack_cooldown() -> void:
 	can_attack = false
-	
+	if get_tree() == null:
+		return
 	await get_tree().create_timer(attack_cooldown).timeout
 	
 	can_attack = true
@@ -39,6 +40,13 @@ func trigger_attack_cooldown() -> void:
 func take_damage(amount:float):
 	current_health -= amount
 	%Slime.play_hurt()
+	
+	var dmg_indicator = DAMAGE_NUMBER.instantiate()
+	# Add it to the main scene tree so it doesn't get deleted if the mob dies
+	get_tree().current_scene.add_child(dmg_indicator)
+	# Cast the amount to an int and trigger the popup animation
+	dmg_indicator.popup(int(amount), global_position)
+	
 	if current_health <= 0:
 
 		$Hitbox.set_deferred("disabled", true)

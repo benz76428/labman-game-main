@@ -5,7 +5,7 @@ extends CharacterBody2D
 signal xp_changed(current_xp, max_xp)
 signal level_changed(new_level)
 signal health_changed(current_health, max_health)
-
+signal stats_updated
 # Preload your mutation picker scene
 const MUTATION_PICKER_SCENE = preload("res://Scenes/Mutation Picker/mutation_picker.tscn")
 
@@ -21,6 +21,7 @@ const MUTATION_PICKER_SCENE = preload("res://Scenes/Mutation Picker/mutation_pic
 
 # The dictionary that actually changes during gameplay
 var current_stats: Dictionary 
+
 var player_direction: Vector2 = Vector2.DOWN
 # --- PROGRESSION & HEALTH VARIABLES ---
 var current_health: float
@@ -46,16 +47,10 @@ func _ready():
 func modify_stat(stat_name: String, amount: float):
 	if current_stats.has(stat_name):
 		current_stats[stat_name] += amount
-		print("Upgraded! ", stat_name, " is now: ", current_stats[stat_name])
-		
-		# If we upgraded max health, we should also heal the player slightly!
-		if stat_name == "max_health":
-			current_health += amount
-			health_changed.emit(current_health, get_stat("max_health"))
+		print(stat_name, " increased by ", amount, ". New total: ", current_stats[stat_name])
+		stats_updated.emit() # <--- THIS IS CRITICAL FOR THE HUD
 	else:
 		print("ERROR: Tried to upgrade a stat that doesn't exist: ", stat_name)
-		
-# Other scripts (like guns and walk states) call this to read a stat
 func get_stat(stat_name: String) -> float:
 	if current_stats.has(stat_name):
 		return current_stats[stat_name]
@@ -75,8 +70,7 @@ func take_damage(amount: int):
 
 func die():
 	print("Player Died!")
-	# You can add game over screen or reload logic here
-	# get_tree().reload_current_scene() 
+	get_tree().change_scene_to_file("res://Main Menu/main_menu.tscn")
 
 # Enemies call this when they die and drop DNA
 func gain_xp(amount: int):

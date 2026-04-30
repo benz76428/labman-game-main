@@ -203,6 +203,14 @@ size = Vector2(10, 16)
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 script = ExtResource("1_l2atl")
+base_stats = {
+"crit_chance": 0.0,
+"damage_multiplier": 1.0,
+"max_health": 100.0,
+"pickup_radius": 50.0,
+"speed": 100.0,
+"speed_multiplier": 1.0
+}
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_2mse5")
