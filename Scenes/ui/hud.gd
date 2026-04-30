@@ -35,8 +35,6 @@ func _generate_stat_labels():
 	# Loop through every single stat in the player's dictionary!
 	for stat_name in player.current_stats.keys():
 		# Optional: Skip max_health since we already have a big visual health bar for it
-		if stat_name == "max_health":
-			continue
 			
 		var new_label = Label.new()
 		stat_container.add_child(new_label)

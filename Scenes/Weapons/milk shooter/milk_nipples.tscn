@@ -11,14 +11,12 @@ collision_layer = 0
 collision_mask = 2
 script = ExtResource("1_71743")
 projectile_scene = ExtResource("2_5td8v")
-fire_rate = 0.0
+fire_rate = 0.5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_dk5gl")
 
-[node name="WeaponPivot" type="Marker2D" parent="."]
-rotation = 0.0013343096
-
-[node name="ShootingPoint" type="Marker2D" parent="WeaponPivot"]
+[node name="ShootingPoint" type="Marker2D" parent="."]
 unique_name_in_owner = true
-position = Vector2(21.998646, -1.0293539)
+position = Vector2(22, -0.9999999)
+rotation = 0.0013343096

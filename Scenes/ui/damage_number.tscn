@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://db7xpeftp120b"]
+
+[ext_resource type="Script" uid="uid://wfrxw8qo3oco" path="res://Scenes/ui/damage_number.gd" id="1_gef6k"]
+
+[node name="DamageNumber" type="Marker2D"]
+script = ExtResource("1_gef6k")
+
+[node name="Label" type="Label" parent="."]
+offset_right = 40.0
+offset_bottom = 23.0

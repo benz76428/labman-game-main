@@ -1,10 +1,9 @@
-[gd_resource type="Resource" script_class="FastFeetMutation" load_steps=2 format=3 uid="uid://dagu2cep6ge37"]
+[gd_resource type="Resource" script_class="Mutation" load_steps=2 format=3 uid="uid://dagu2cep6ge37"]
 
-[ext_resource type="Script" uid="uid://bvwqqlsucxuuc" path="res://Scripts/Mutations/fast feet/fast_feet_mutation.gd" id="1_oiisj"]
+[ext_resource type="Script" uid="uid://4t87huefrkpe" path="res://Scripts/Mutations/mutation.gd" id="1_oiisj"]
 
 [resource]
 script = ExtResource("1_oiisj")
 mutation_name = "Fast Feet"
-target_stat = "10"
+target_stat = "speed_multiplier"
 base_value = 1.0
-metadata/_custom_type_script = "uid://bvwqqlsucxuuc"

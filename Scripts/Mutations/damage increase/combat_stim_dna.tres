@@ -1,10 +1,9 @@
-[gd_resource type="Resource" script_class="CombatStimMutation" load_steps=2 format=3 uid="uid://brj530n0j7srx"]
+[gd_resource type="Resource" script_class="Mutation" load_steps=2 format=3 uid="uid://brj530n0j7srx"]
 
-[ext_resource type="Script" uid="uid://bpuiyvxx3aamk" path="res://Scripts/Mutations/damage increase/combat_stim_mutation.gd" id="1_ovlip"]
+[ext_resource type="Script" uid="uid://4t87huefrkpe" path="res://Scripts/Mutations/mutation.gd" id="1_ovlip"]
 
 [resource]
 script = ExtResource("1_ovlip")
-mutation_name = "Combat Stimulant"
-mutation_description = "Increase Damage Dealt"
-base_value = 2.0
-metadata/_custom_type_script = "uid://bpuiyvxx3aamk"
+mutation_name = "Combat Stim"
+target_stat = "damage_multiplier"
+base_value = 10.0

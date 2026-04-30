@@ -8,7 +8,7 @@ extends CharacterBody2D
 var current_health: int
 var can_shoot: bool = true
 const DNA_DROP = preload("res://Scenes/xp/dna_drop.tscn") 
-
+const DAMAGE_NUMBER = preload("res://Scenes/ui/damage_number.tscn")
 @onready var player = get_tree().get_first_node_in_group("player")
 @export var projectile_scene: PackedScene 
 
@@ -43,7 +43,11 @@ func shoot(direction: Vector2):
 func take_damage(amount):
 	current_health -= amount
 	%Slime.play_hurt()
-	print("Enemy took ", amount, " damage! Health left: ", current_health)
+	var dmg_indicator = DAMAGE_NUMBER.instantiate()
+	# Add it to the main scene tree so it doesn't get deleted if the mob dies
+	get_tree().current_scene.add_child(dmg_indicator)
+	# Cast the amount to an int and trigger the popup animation
+	dmg_indicator.popup(int(amount), global_position)
 	if current_health <= 0:
 
 		$Hitbox.set_deferred("disabled", true)
