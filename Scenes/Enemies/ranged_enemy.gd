@@ -4,7 +4,7 @@ extends CharacterBody2D
 @export var speed: float = 150.0
 @export var attack_range: float = 300.0 # How close they need to be to shoot
 @export var fire_rate: float = 1.5 # Time between shots
-
+@export var animated_sprite_2d: AnimatedSprite2D
 var current_health: int
 var can_shoot: bool = true
 const DNA_DROP = preload("res://Scenes/xp/dna_drop.tscn") 
@@ -13,8 +13,11 @@ const DAMAGE_NUMBER = preload("res://Scenes/ui/damage_number.tscn")
 @export var projectile_scene: PackedScene 
 
 func _ready():
+	
+	animated_sprite_2d.play('walk')
 	current_health = max_health
-
+	
+	
 func _physics_process(delta):
 	if player:
 		var distance_to_player = global_position.distance_to(player.global_position)
@@ -42,7 +45,6 @@ func shoot(direction: Vector2):
 
 func take_damage(amount):
 	current_health -= amount
-	%Slime.play_hurt()
 	var dmg_indicator = DAMAGE_NUMBER.instantiate()
 	# Add it to the main scene tree so it doesn't get deleted if the mob dies
 	get_tree().current_scene.add_child(dmg_indicator)

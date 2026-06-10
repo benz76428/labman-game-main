@@ -1,23 +1,74 @@
-[gd_scene load_steps=5 format=3 uid="uid://d05v2pjxph6st"]
+[gd_scene load_steps=12 format=3 uid="uid://d05v2pjxph6st"]
 
 [ext_resource type="Script" uid="uid://uk66cudh83fg" path="res://Scenes/Enemies/ranged_enemy.gd" id="1_y5oqy"]
-[ext_resource type="PackedScene" uid="uid://ogik4s70pgwl" path="res://Scenes/Enemies/base_slime/slime.tscn" id="2_o41p3"]
 [ext_resource type="PackedScene" uid="uid://blhurklnyjvk4" path="res://Scenes/Enemies/Enemy Projectile/enemy_projectile.tscn" id="2_utyy5"]
+[ext_resource type="Texture2D" uid="uid://11860yykk83b" path="res://Scenes/Enemies/Fire Slinger/Enemy_08_A.png" id="3_utyy5"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xegtm"]
+atlas = ExtResource("3_utyy5")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hi62u"]
+atlas = ExtResource("3_utyy5")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ggc8t"]
+atlas = ExtResource("3_utyy5")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3vtte"]
+atlas = ExtResource("3_utyy5")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qqnww"]
+atlas = ExtResource("3_utyy5")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ugsxx"]
+atlas = ExtResource("3_utyy5")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_beuir"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xegtm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hi62u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ggc8t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3vtte")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qqnww")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ugsxx")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
+}]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ddotj"]
-radius = 55.00909
+radius = 44.46673
 
-[node name="fire_slinger" type="CharacterBody2D" groups=["enemy"]]
-scale = Vector2(0.15742107, 0.15030457)
+[node name="fire_slinger" type="CharacterBody2D" node_paths=PackedStringArray("animated_sprite_2d") groups=["enemy"]]
 collision_layer = 3
 script = ExtResource("1_y5oqy")
+speed = 50.0
+attack_range = 150.0
+animated_sprite_2d = NodePath("AnimatedSprite2D")
 projectile_scene = ExtResource("2_utyy5")
 
-[node name="Slime" parent="." instance=ExtResource("2_o41p3")]
-unique_name_in_owner = true
-modulate = Color(1, 0.1882353, 0.15686275, 1)
-position = Vector2(12.279884, -4.2471085)
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_beuir")
+animation = &"walk"
+frame_progress = 0.2779914
 
 [node name="Hitbox" type="CollisionShape2D" parent="."]
-position = Vector2(13, -31)
 shape = SubResource("CircleShape2D_ddotj")

@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://d3ldmn414rawm" path="res://shoot_em_up_game.gd" id="1_4ey1b"]
 [ext_resource type="PackedScene" uid="uid://lhdt6ldjlqlb" path="res://Scenes/Player/Player.tscn" id="1_ikqfa"]
 [ext_resource type="PackedScene" uid="uid://8yommuxxcijv" path="res://Scenes/ui/hud.tscn" id="2_4ey1b"]
-[ext_resource type="PackedScene" uid="uid://cfigvc5pk1hm2" path="res://Scenes/World Objects/pine_tree.tscn" id="2_5thnd"]
+[ext_resource type="PackedScene" uid="uid://c66nt763ofwel" path="res://Scenes/level_1.tscn" id="2_seye2"]
 
 [sub_resource type="Curve2D" id="Curve2D_seye2"]
 _data = {
@@ -15,54 +15,25 @@ point_count = 5
 y_sort_enabled = true
 script = ExtResource("1_4ey1b")
 
+[node name="Level1" parent="." instance=ExtResource("2_seye2")]
+
 [node name="HUD" parent="." instance=ExtResource("2_4ey1b")]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 layer = -1
 
-[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
-offset_right = 1920.0
-offset_bottom = 1082.0
-color = Color(0.22745098, 0.8235294, 0.2, 1)
-
 [node name="Player" parent="." instance=ExtResource("1_ikqfa")]
-position = Vector2(575, 349)
+position = Vector2(961, 611)
 
 [node name="Path2D" type="Path2D" parent="Player"]
-position = Vector2(-575, -349)
+position = Vector2(-639.20667, -386.30582)
+scale = Vector2(0.6883172, 0.74271846)
 curve = SubResource("Curve2D_seye2")
 
 [node name="PathFollow2D" type="PathFollow2D" parent="Player/Path2D"]
 unique_name_in_owner = true
 position = Vector2(-182, -133)
 rotation = -0.005112866
-
-[node name="Pine_tree" parent="." instance=ExtResource("2_5thnd")]
-position = Vector2(199, 412)
-
-[node name="Pine_tree5" parent="." instance=ExtResource("2_5thnd")]
-position = Vector2(235, 1001)
-
-[node name="Pine_tree6" parent="." instance=ExtResource("2_5thnd")]
-position = Vector2(1725, 369)
-
-[node name="Pine_tree7" parent="." instance=ExtResource("2_5thnd")]
-position = Vector2(1753, 948)
-
-[node name="Pine_tree8" parent="." instance=ExtResource("2_5thnd")]
-position = Vector2(1363, 753)
-
-[node name="Pine_tree9" parent="." instance=ExtResource("2_5thnd")]
-position = Vector2(896, 993)
-
-[node name="Pine_tree2" parent="." instance=ExtResource("2_5thnd")]
-position = Vector2(922, 552)
-
-[node name="Pine_tree3" parent="." instance=ExtResource("2_5thnd")]
-position = Vector2(980, 190)
-
-[node name="Pine_tree4" parent="." instance=ExtResource("2_5thnd")]
-position = Vector2(337, 184)
 
 [node name="MobSpawner" type="Timer" parent="."]
 wait_time = 0.3

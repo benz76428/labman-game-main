@@ -1,12 +1,12 @@
 extends Node2D
 
 var enemy_spawn_chances = [
+	#{
+		#"scene": preload("res://Scenes/Enemies/Test_Slime/mob.tscn"), 
+		#"weight": 80.0 #chance
+	#},
 	{
-		"scene": preload("res://Scenes/Enemies/Test_Slime/mob.tscn"), 
-		"weight": 80.0 #chance
-	},
-	{
-		"scene": preload("res://Scenes/Enemies/Test_fast_slime/fast_mob.tscn"), 
+		"scene": preload("res://Scenes/Enemies/The Slime/the_slime.tscn"), 
 		"weight": 20.0 #chance
 	},
 	{

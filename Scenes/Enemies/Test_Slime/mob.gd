@@ -3,15 +3,17 @@ extends CharacterBody2D
 @export var max_health: int = 10
 @export var speed: float = 50 
 @export var damage_amount: int = 10
-@export var attack_cooldown: float = 1.0 
+@export var attack_cooldown: float = 1.0
+@export var animated_sprite_2d: AnimatedSprite2D
 var can_attack: bool = true
 var current_health: int
-
+var anim_name = "walk_right"
 const DNA_DROP = preload("res://Scenes/xp/dna_drop.tscn") 
 const DAMAGE_NUMBER = preload("res://Scenes/ui/damage_number.tscn")
 @onready var player = get_tree().get_first_node_in_group("player")
 func _ready():
-	%Slime.play_walk()
+	
+	animated_sprite_2d.play('walk_right')
 	current_health = max_health
 	
 func _physics_process(delta: float) -> void:
@@ -39,7 +41,7 @@ func trigger_attack_cooldown() -> void:
 	
 func take_damage(amount:float):
 	current_health -= amount
-	%Slime.play_hurt()
+	#%Slime.play_hurt()
 	
 	var dmg_indicator = DAMAGE_NUMBER.instantiate()
 	# Add it to the main scene tree so it doesn't get deleted if the mob dies

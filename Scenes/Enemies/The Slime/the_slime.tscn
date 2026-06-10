@@ -1,0 +1,45 @@
+[gd_scene load_steps=8 format=3 uid="uid://dpoewv3w86df3"]
+
+[ext_resource type="Texture2D" uid="uid://pcuvv41q26qg" path="res://Scenes/Enemies/The Slime/slime frames/slime moving right1.png" id="1_l0xem"]
+[ext_resource type="Script" uid="uid://b42pjthpj3vy7" path="res://Scenes/Enemies/Test_Slime/mob.gd" id="1_mlhvn"]
+[ext_resource type="Texture2D" uid="uid://d2368qy2qrdib" path="res://Scenes/Enemies/The Slime/slime frames/slime moving right2.png" id="2_mlhvn"]
+[ext_resource type="Texture2D" uid="uid://dx6cevnpg7q8u" path="res://Scenes/Enemies/The Slime/slime frames/slime moving right3.png" id="3_w4qsp"]
+[ext_resource type="Texture2D" uid="uid://5ayxj7qs1cgx" path="res://Scenes/Enemies/The Slime/slime frames/slime moving right4.png" id="4_658rk"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_84uil"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_l0xem")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_mlhvn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_w4qsp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_658rk")
+}],
+"loop": true,
+"name": &"walk_right",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ra8av"]
+size = Vector2(19, 8)
+
+[node name="Slime" type="CharacterBody2D" node_paths=PackedStringArray("animated_sprite_2d") groups=["enemy"]]
+collision_layer = 3
+script = ExtResource("1_mlhvn")
+animated_sprite_2d = NodePath("AnimatedSprite2D")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -16)
+sprite_frames = SubResource("SpriteFrames_84uil")
+animation = &"walk_right"
+frame_progress = 0.20540616
+
+[node name="Hitbox" type="CollisionShape2D" parent="."]
+position = Vector2(0.5, -4)
+shape = SubResource("RectangleShape2D_ra8av")
