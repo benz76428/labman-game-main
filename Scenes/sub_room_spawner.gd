@@ -1,0 +1,115 @@
+extends Node2D
+
+@export var treasure_room_scene: PackedScene
+@export var other_rooms_to_spawn: Array[PackedScene] 
+@export var spawn_area_polygon: Polygon2D 
+
+@export_group("Player Spawn Protection")
+@export var player_spawn_marker: Marker2D 
+@export var safe_zone_size: Vector2 = Vector2(400, 400) 
+
+@export_group("Grid Settings")
+# Set this to exactly match your TileMap's tile size! (e.g., 16x16, 32x32)
+@export var grid_size: Vector2 = Vector2(16, 16) 
+
+var occupied_areas: Array[Rect2] = []
+
+func _ready():
+	if spawn_area_polygon:
+		spawn_area_polygon.hide()
+		
+		if player_spawn_marker:
+			var safe_pos = player_spawn_marker.global_position - (safe_zone_size / 2.0)
+			var safe_rect = Rect2(safe_pos, safe_zone_size)
+			occupied_areas.append(safe_rect)
+		else:
+			push_warning("Player Spawn Marker not assigned!")
+			
+		# Notice we no longer pass Vector2(200, 200) here!
+		if treasure_room_scene:
+			spawn_sub_room(treasure_room_scene)
+			
+		for room_scene in other_rooms_to_spawn:
+			if room_scene:
+				spawn_sub_room(room_scene)
+				
+	else:
+		push_error("Please assign a Polygon2D in the inspector!")
+
+# We removed the room_size argument, the script finds it automatically now!
+func spawn_sub_room(room_scene: PackedScene):
+	# 1. Instantiate the room first so we can look at it
+	var room_instance = room_scene.instantiate()
+	
+	# 2. Look for the ReferenceRect we added
+	var bounds_node = room_instance.get_node_or_null("RoomBounds")
+	var room_size = Vector2.ZERO
+	
+	# 3. Read the size visually set by the designer!
+	if bounds_node and bounds_node is ReferenceRect:
+		room_size = bounds_node.size
+	else:
+		push_warning("Room is missing a ReferenceRect named 'RoomBounds'! Defaulting to 256x256.")
+		room_size = Vector2(256, 256)
+		
+	var max_attempts = 100 
+	var attempt = 0
+	var spawned = false
+	
+	var points = spawn_area_polygon.polygon
+	var bounds = get_polygon_bounds(points)
+	
+	while attempt < max_attempts and not spawned:
+		var random_x = randf_range(bounds.position.x, bounds.end.x - room_size.x)
+		var random_y = randf_range(bounds.position.y, bounds.end.y - room_size.y)
+		
+		# Snapping to your grid size (ensure grid_size is still exported at the top of your script!)
+		var candidate_pos = Vector2(random_x, random_y).snapped(grid_size)
+		
+		var top_left = candidate_pos
+		var top_right = candidate_pos + Vector2(room_size.x, 0)
+		var bottom_left = candidate_pos + Vector2(0, room_size.y)
+		var bottom_right = candidate_pos + room_size
+		
+		if Geometry2D.is_point_in_polygon(top_left, points) and \
+		   Geometry2D.is_point_in_polygon(top_right, points) and \
+		   Geometry2D.is_point_in_polygon(bottom_left, points) and \
+		   Geometry2D.is_point_in_polygon(bottom_right, points):
+			
+			var candidate_rect = Rect2(candidate_pos, room_size)
+			var overlaps = false
+			
+			for occupied in occupied_areas:
+				if candidate_rect.intersects(occupied):
+					overlaps = true
+					break
+			
+			if not overlaps:
+				# We found a spot! Move our instance here and officially add it to the game.
+				room_instance.position = candidate_pos
+				add_child(room_instance)
+				
+				occupied_areas.append(candidate_rect)
+				spawned = true
+				
+		attempt += 1
+		
+	if not spawned:
+		push_warning("Failed to find a valid spot. Destroying the room.")
+		room_instance.queue_free() # Clean up the room if it couldn't find a place to exist
+
+func get_polygon_bounds(points: PackedVector2Array) -> Rect2:
+	if points.is_empty(): return Rect2()
+	
+	var min_x = points[0].x
+	var max_x = points[0].x
+	var min_y = points[0].y
+	var max_y = points[0].y
+	
+	for p in points:
+		min_x = min(min_x, p.x)
+		max_x = max(max_x, p.x)
+		min_y = min(min_y, p.y)
+		max_y = max(max_y, p.y)
+		
+	return Rect2(min_x, min_y, max_x - min_x, max_y - min_y)

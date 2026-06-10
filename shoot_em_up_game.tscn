@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://8yommuxxcijv" path="res://Scenes/ui/hud.tscn" id="2_4ey1b"]
 [ext_resource type="PackedScene" uid="uid://c66nt763ofwel" path="res://Scenes/level_1.tscn" id="2_seye2"]
 
-[sub_resource type="Curve2D" id="Curve2D_seye2"]
+[sub_resource type="Curve2D" id="Curve2D_4ey1b"]
 _data = {
 "points": PackedVector2Array(0, 0, 0, 0, -182, -133, 0, 0, 0, 0, 2165, -145, 0, 0, 0, 0, 2109, 1297, 0, 0, 0, 0, -206, 1271, 0, 0, 0, 0, -182, -133)
 }
@@ -22,21 +22,21 @@ script = ExtResource("1_4ey1b")
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 layer = -1
 
+[node name="MobSpawner" type="Timer" parent="."]
+wait_time = 0.3
+autostart = true
+
 [node name="Player" parent="." instance=ExtResource("1_ikqfa")]
 position = Vector2(961, 611)
 
 [node name="Path2D" type="Path2D" parent="Player"]
 position = Vector2(-639.20667, -386.30582)
 scale = Vector2(0.6883172, 0.74271846)
-curve = SubResource("Curve2D_seye2")
+curve = SubResource("Curve2D_4ey1b")
 
 [node name="PathFollow2D" type="PathFollow2D" parent="Player/Path2D"]
 unique_name_in_owner = true
 position = Vector2(-182, -133)
 rotation = -0.005112866
-
-[node name="MobSpawner" type="Timer" parent="."]
-wait_time = 0.3
-autostart = true
 
 [connection signal="timeout" from="MobSpawner" to="." method="_on_mob_spawner_timeout"]
