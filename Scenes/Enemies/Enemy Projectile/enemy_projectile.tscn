@@ -8,6 +8,7 @@ radius = 16.03122
 
 [node name="EnemyProjectile" type="Area2D"]
 scale = Vector2(0.565643, 0.58667797)
+collision_layer = 3
 script = ExtResource("1_fplyy")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

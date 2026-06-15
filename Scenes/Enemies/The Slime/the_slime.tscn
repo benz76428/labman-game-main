@@ -43,3 +43,6 @@ frame_progress = 0.20540616
 [node name="Hitbox" type="CollisionShape2D" parent="."]
 position = Vector2(0.5, -4)
 shape = SubResource("RectangleShape2D_ra8av")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+avoidance_enabled = true

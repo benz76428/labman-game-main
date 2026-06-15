@@ -3,7 +3,7 @@ extends Node2D
 @export var treasure_room_scene: PackedScene
 @export var other_rooms_to_spawn: Array[PackedScene] 
 @export var spawn_area_polygon: Polygon2D 
-
+@export var nav_region: NavigationRegion2D
 @export_group("Player Spawn Protection")
 @export var player_spawn_marker: Marker2D 
 @export var safe_zone_size: Vector2 = Vector2(400, 400) 
@@ -25,14 +25,22 @@ func _ready():
 		else:
 			push_warning("Player Spawn Marker not assigned!")
 			
-		# Notice we no longer pass Vector2(200, 200) here!
+		# Spawn the treasure room
 		if treasure_room_scene:
 			spawn_sub_room(treasure_room_scene)
 			
+		# Spawn all other rooms
 		for room_scene in other_rooms_to_spawn:
 			if room_scene:
 				spawn_sub_room(room_scene)
-				
+		
+		# --- FIX: BAKE OUTSIDE THE LOOP ---
+		# Wait for the physics engine to register all wall colliders
+		await get_tree().physics_frame 
+		
+		if nav_region:
+			nav_region.bake_navigation_polygon()
+			print("Navigation map baked successfully!")
 	else:
 		push_error("Please assign a Polygon2D in the inspector!")
 

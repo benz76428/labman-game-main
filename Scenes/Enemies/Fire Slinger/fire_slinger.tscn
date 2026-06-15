@@ -55,13 +55,13 @@ animations = [{
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ddotj"]
-radius = 44.46673
+radius = 4.429058
 
 [node name="fire_slinger" type="CharacterBody2D" node_paths=PackedStringArray("animated_sprite_2d") groups=["enemy"]]
 collision_layer = 3
 script = ExtResource("1_y5oqy")
 speed = 50.0
-attack_range = 150.0
+attack_range = 50.0
 animated_sprite_2d = NodePath("AnimatedSprite2D")
 projectile_scene = ExtResource("2_utyy5")
 
@@ -71,4 +71,8 @@ animation = &"walk"
 frame_progress = 0.2779914
 
 [node name="Hitbox" type="CollisionShape2D" parent="."]
+position = Vector2(0, 2)
+scale = Vector2(1.5804714, 2.0233536)
 shape = SubResource("CircleShape2D_ddotj")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]

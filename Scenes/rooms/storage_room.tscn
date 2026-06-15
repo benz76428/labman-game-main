@@ -1171,6 +1171,7 @@ physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_o2mtd")
 
 [node name="Storage_Room" type="Node2D"]
+z_index = 1
 
 [node name="Walls" type="TileMapLayer" parent="."]
 scale = Vector2(0.9926176, 1.0107895)

@@ -10,6 +10,7 @@ radius = 54.0
 scale = Vector2(0.2, 0.2)
 collision_layer = 3
 script = ExtResource("1_qrf6t")
+max_health = 100
 speed = 100.0
 damage_amount = 17
 attack_cooldown = 2.0

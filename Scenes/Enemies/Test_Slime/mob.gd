@@ -11,16 +11,35 @@ var anim_name = "walk_right"
 const DNA_DROP = preload("res://Scenes/xp/dna_drop.tscn") 
 const DAMAGE_NUMBER = preload("res://Scenes/ui/damage_number.tscn")
 @onready var player = get_tree().get_first_node_in_group("player")
+@onready var nav_agent: NavigationAgent2D = $NavigationAgent2D
 func _ready():
 	
 	animated_sprite_2d.play('walk_right')
 	current_health = max_health
-	
+	if nav_agent:
+		nav_agent.path_desired_distance = 10.0
+		nav_agent.target_desired_distance = 20.0
 func _physics_process(delta: float) -> void:
 	if player == null:
 		return
-	var direction = global_position.direction_to(player.global_position)
-	velocity = direction * speed
+	# Tell the agent where the player currently is
+	nav_agent.target_position = player.global_position
+	var distance_to_player = global_position.distance_to(player.global_position)
+	# If we are close enough to the player, stop walking
+	if distance_to_player < 20.0:
+		# We are actually touching the player. Stop moving.
+		velocity = Vector2.ZERO
+	elif nav_agent.is_navigation_finished() or not nav_agent.is_target_reachable():
+		# The path is broken, or the map is still loading! 
+		# FALLBACK: Walk directly toward the player like the old code.
+		var fallback_direction = global_position.direction_to(player.global_position)
+		velocity = fallback_direction * speed
+	else:
+		# The path is perfect! Follow the smart path around the walls.
+		var next_path_pos = nav_agent.get_next_path_position()
+		var direction = global_position.direction_to(next_path_pos)
+		velocity = direction * speed
+	
 	move_and_slide()
 	for i in get_slide_collision_count():
 		var collision = get_slide_collision(i)

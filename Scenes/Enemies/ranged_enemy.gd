@@ -11,25 +11,41 @@ const DNA_DROP = preload("res://Scenes/xp/dna_drop.tscn")
 const DAMAGE_NUMBER = preload("res://Scenes/ui/damage_number.tscn")
 @onready var player = get_tree().get_first_node_in_group("player")
 @export var projectile_scene: PackedScene 
-
+@onready var nav_agent: NavigationAgent2D = $NavigationAgent2D
 func _ready():
 	
 	animated_sprite_2d.play('walk')
 	current_health = max_health
-	
-	
+	if nav_agent:
+		nav_agent.path_desired_distance = 30.0
+		nav_agent.target_desired_distance = 10.0
+		nav_agent.avoidance_enabled = true
 func _physics_process(delta):
+	
 	if player:
 		var distance_to_player = global_position.distance_to(player.global_position)
-		var direction = global_position.direction_to(player.global_position)
+		var direction_to_player = global_position.direction_to(player.global_position)
 		
 		if distance_to_player > attack_range:
-			velocity = direction * speed
+			# --- NAVIGATION MOVEMENT ---
+			nav_agent.target_position = player.global_position
+			
+			# Get the next point in the path
+			var next_path_pos = nav_agent.get_next_path_position()
+			
+			# Move toward that point
+			var new_velocity = global_position.direction_to(next_path_pos) * speed
+			
+			# Apply velocity with a small amount of smoothing if you like, 
+			# but simple assignment works for this setup
+			velocity = new_velocity
 			move_and_slide()
 		else:
+			# --- SHOOTING ---
 			velocity = Vector2.ZERO
 			if can_shoot:
-				shoot(direction)
+				# Use direction_to_player for shooting so you face/shoot at the player
+				shoot(direction_to_player)
 
 func shoot(direction: Vector2):
 	can_shoot = false
