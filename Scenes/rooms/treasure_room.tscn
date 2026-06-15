@@ -94,6 +94,8 @@ texture = ExtResource("2_k8rj7")
 30:7/size_in_atlas = Vector2i(3, 4)
 30:7/0 = 0
 30:7/0/z_index = 2
+30:7/0/physics_layer_0/polygon_0/points = PackedVector2Array(-7.733925, -12.230393, 8.45336, -11.510958, 8, 8, -8, 8)
+30:7/0/physics_layer_0/polygon_1/points = PackedVector2Array(-10.791523, 11.690817, -10.611664, 18.885168, -3.2374563, 23.381636, 5.935339, 21.762907, 10.431807, 18.34559, 10.431807, 11.510959, 8, 8, -7.3742075, 9.532513)
 24:2/0 = 0
 24:2/0/z_index = 2
 24:3/0 = 0
@@ -122,6 +124,10 @@ texture = ExtResource("2_k8rj7")
 1:3/0 = 0
 1:4/0 = 0
 1:5/0 = 0
+25:14/0 = 0
+25:14/0/z_index = 1
+25:15/0 = 0
+25:15/0/z_index = 1
 
 [sub_resource type="TileSet" id="TileSet_bvyto"]
 physics_layer_0/collision_layer = 1
@@ -189,6 +195,23 @@ texture = ExtResource("3_udmu1")
 [sub_resource type="TileSet" id="TileSet_hda2b"]
 sources/0 = SubResource("TileSetAtlasSource_qb0bp")
 
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_3w4a8"]
+texture = ExtResource("2_k8rj7")
+17:7/0 = 0
+17:7/0/z_index = 1
+17:8/0 = 0
+17:8/0/z_index = 1
+17:9/0 = 0
+17:9/0/z_index = 1
+17:12/0 = 0
+17:12/0/z_index = 1
+17:11/0 = 0
+17:11/0/z_index = 1
+
+[sub_resource type="TileSet" id="TileSet_jfbyy"]
+physics_layer_0/collision_layer = 1
+sources/0 = SubResource("TileSetAtlasSource_3w4a8")
+
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_7aovo"]
 texture = ExtResource("2_k8rj7")
 16:7/0 = 0
@@ -214,23 +237,6 @@ texture = ExtResource("2_k8rj7")
 physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_7aovo")
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_3w4a8"]
-texture = ExtResource("2_k8rj7")
-17:7/0 = 0
-17:7/0/z_index = 1
-17:8/0 = 0
-17:8/0/z_index = 1
-17:9/0 = 0
-17:9/0/z_index = 1
-17:12/0 = 0
-17:12/0/z_index = 1
-17:11/0 = 0
-17:11/0/z_index = 1
-
-[sub_resource type="TileSet" id="TileSet_jfbyy"]
-physics_layer_0/collision_layer = 1
-sources/0 = SubResource("TileSetAtlasSource_3w4a8")
-
 [node name="Treasure_Room" type="Node2D"]
 
 [node name="Walls" type="TileMapLayer" parent="."]
@@ -240,7 +246,7 @@ tile_set = SubResource("TileSet_di3k3")
 
 [node name="Decoration" type="TileMapLayer" parent="."]
 position = Vector2(0, 144)
-tile_map_data = PackedByteArray("AAACAPr/AAAeAAcAAAAFAPr/AAAeAAcAAAAEAPj/AAAZAAIAAAADAPj/AAAZAAIAAAAEAPn/AAAZAAMAAAADAPn/AAAZAAMAAAACAP7/AAAhAA4AAAADAP7/AAAiAA4AAAAEAP7/AAAjAA4AAAA=")
+tile_map_data = PackedByteArray("AAACAPr/AAAeAAcAAAAFAPr/AAAeAAcAAAAEAPj/AAAZAAIAAAADAPj/AAAZAAIAAAAEAPn/AAAZAAMAAAADAPn/AAAZAAMAAAACAP7/AAAhAA4AAAADAP7/AAAiAA4AAAAEAP7/AAAjAA4AAAABAPj/AAAZAA4AAAAGAPj/AAAZAA8AAAA=")
 tile_set = SubResource("TileSet_bvyto")
 
 [node name="Floor" type="TileMapLayer" parent="."]
@@ -255,14 +261,13 @@ tile_set = SubResource("TileSet_hda2b")
 [node name="Doors" type="TileMapLayer" parent="."]
 position = Vector2(0, 144)
 
+[node name="Open" type="TileMapLayer" parent="Doors"]
+tile_map_data = PackedByteArray("AAAHAPn/AAARAAcAAAAHAPr/AAARAAgAAAAHAPv/AAARAAkAAAAHAP3/AAARAAsAAAAHAP7/AAARAAwAAAA=")
+tile_set = SubResource("TileSet_jfbyy")
+
 [node name="Closed" type="TileMapLayer" parent="Doors"]
 tile_map_data = PackedByteArray("AAAHAPn/AAAQAAcAAAAHAPr/AAAQAAgAAAAHAPv/AAAQAAkAAAAHAPz/AAAQAAoAAAAHAP3/AAAQAAsAAAAHAP7/AAAQAAwAAAA=")
 tile_set = SubResource("TileSet_uw6mr")
-
-[node name="Open" type="TileMapLayer" parent="Doors"]
-visible = false
-tile_map_data = PackedByteArray("AAAHAPn/AAARAAcAAAAHAPr/AAARAAgAAAAHAPv/AAARAAkAAAAHAP3/AAARAAsAAAAHAP7/AAARAAwAAAA=")
-tile_set = SubResource("TileSet_jfbyy")
 
 [node name="RoomBounds" type="ReferenceRect" parent="."]
 offset_right = 40.0

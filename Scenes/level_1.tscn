@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=4 uid="uid://c66nt763ofwel"]
+[gd_scene load_steps=16 format=4 uid="uid://c66nt763ofwel"]
 
 [ext_resource type="Texture2D" uid="uid://ctjiduo4dr0xm" path="res://Tilesets/tiles_laboratory_LandOfPixels/16px/tilesWalls.png" id="1_7p6j4"]
 [ext_resource type="Texture2D" uid="uid://bhwvan6bvgv1n" path="res://Tilesets/Futuristic Labs Tileset.png" id="2_6444e"]
@@ -6,6 +6,8 @@
 [ext_resource type="Texture2D" uid="uid://b2yk4u2p16fsg" path="res://Tilesets/tiles_laboratory_LandOfPixels/16px/tilesFloor.png" id="4_lsmp6"]
 [ext_resource type="Script" uid="uid://cwomo8ni2pcst" path="res://Scenes/sub_room_spawner.gd" id="5_6444e"]
 [ext_resource type="PackedScene" uid="uid://bhtgqsta4sue7" path="res://Scenes/rooms/treasure_room.tscn" id="6_evi0p"]
+[ext_resource type="PackedScene" uid="uid://cbv3bf7304l4y" path="res://Scenes/rooms/storage_room.tscn" id="7_lsmp6"]
+[ext_resource type="PackedScene" uid="uid://c6u0oo1dndd3w" path="res://Scenes/rooms/room.tscn" id="8_xrdnt"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_xrdnt"]
 texture = ExtResource("1_7p6j4")
@@ -90,15 +92,15 @@ tile_set = SubResource("TileSet_6ioyp")
 [node name="SubRoomSpawner" type="Node2D" parent="." node_paths=PackedStringArray("spawn_area_polygon", "player_spawn_marker")]
 script = ExtResource("5_6444e")
 treasure_room_scene = ExtResource("6_evi0p")
-other_rooms_to_spawn = Array[PackedScene]([ExtResource("6_evi0p"), ExtResource("6_evi0p"), ExtResource("6_evi0p"), ExtResource("6_evi0p"), ExtResource("6_evi0p"), ExtResource("6_evi0p"), ExtResource("6_evi0p")])
+other_rooms_to_spawn = Array[PackedScene]([ExtResource("7_lsmp6"), ExtResource("8_xrdnt")])
 spawn_area_polygon = NodePath("Polygon2D")
 player_spawn_marker = NodePath("../PlayerSpawnPoint")
 
 [node name="Polygon2D" type="Polygon2D" parent="SubRoomSpawner"]
-position = Vector2(106, 156)
-scale = Vector2(0.8887057, 0.7893524)
+position = Vector2(109.758995, 156.38249)
+scale = Vector2(0.8215808, 0.7825461)
 color = Color(0.23529412, 0.8235294, 0.39607844, 0.2)
-polygon = PackedVector2Array(56.000004, 56.197014, 56, 1248, 1993.562, 1243.2137, 1976.9706, 56.197014)
+polygon = PackedVector2Array(56.000004, 56.197014, 56, 1248, 1984.2738, 1256.9453, 1976.9706, 56.197014)
 
 [node name="PlayerSpawnPoint" type="Marker2D" parent="."]
 position = Vector2(978, 656)
