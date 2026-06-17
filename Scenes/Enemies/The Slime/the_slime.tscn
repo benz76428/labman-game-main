@@ -1,10 +1,15 @@
-[gd_scene load_steps=8 format=3 uid="uid://dpoewv3w86df3"]
+[gd_scene load_steps=10 format=3 uid="uid://dpoewv3w86df3"]
 
 [ext_resource type="Texture2D" uid="uid://pcuvv41q26qg" path="res://Scenes/Enemies/The Slime/slime frames/slime moving right1.png" id="1_l0xem"]
 [ext_resource type="Script" uid="uid://b42pjthpj3vy7" path="res://Scenes/Enemies/Test_Slime/mob.gd" id="1_mlhvn"]
 [ext_resource type="Texture2D" uid="uid://d2368qy2qrdib" path="res://Scenes/Enemies/The Slime/slime frames/slime moving right2.png" id="2_mlhvn"]
+[ext_resource type="Shader" uid="uid://dqlaf35x7afok" path="res://Shaders/hit_flash.gdshader" id="2_w4qsp"]
 [ext_resource type="Texture2D" uid="uid://dx6cevnpg7q8u" path="res://Scenes/Enemies/The Slime/slime frames/slime moving right3.png" id="3_w4qsp"]
 [ext_resource type="Texture2D" uid="uid://5ayxj7qs1cgx" path="res://Scenes/Enemies/The Slime/slime frames/slime moving right4.png" id="4_658rk"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_658rk"]
+shader = ExtResource("2_w4qsp")
+shader_parameter/flash_modifier = 0.0
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_84uil"]
 animations = [{
@@ -27,7 +32,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ra8av"]
-size = Vector2(19, 8)
+size = Vector2(13, 6.5)
 
 [node name="Slime" type="CharacterBody2D" node_paths=PackedStringArray("animated_sprite_2d") groups=["enemy"]]
 collision_layer = 3
@@ -35,6 +40,7 @@ script = ExtResource("1_mlhvn")
 animated_sprite_2d = NodePath("AnimatedSprite2D")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+material = SubResource("ShaderMaterial_658rk")
 position = Vector2(0, -16)
 sprite_frames = SubResource("SpriteFrames_84uil")
 animation = &"walk_right"

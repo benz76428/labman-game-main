@@ -1,8 +1,13 @@
-[gd_scene load_steps=12 format=3 uid="uid://d05v2pjxph6st"]
+[gd_scene load_steps=14 format=3 uid="uid://d05v2pjxph6st"]
 
 [ext_resource type="Script" uid="uid://uk66cudh83fg" path="res://Scenes/Enemies/ranged_enemy.gd" id="1_y5oqy"]
 [ext_resource type="PackedScene" uid="uid://blhurklnyjvk4" path="res://Scenes/Enemies/Enemy Projectile/enemy_projectile.tscn" id="2_utyy5"]
 [ext_resource type="Texture2D" uid="uid://11860yykk83b" path="res://Scenes/Enemies/Fire Slinger/Enemy_08_A.png" id="3_utyy5"]
+[ext_resource type="Shader" uid="uid://dqlaf35x7afok" path="res://Shaders/hit_flash.gdshader" id="3_xegtm"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hi62u"]
+shader = ExtResource("3_xegtm")
+shader_parameter/flash_modifier = 0.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xegtm"]
 atlas = ExtResource("3_utyy5")
@@ -55,7 +60,7 @@ animations = [{
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ddotj"]
-radius = 4.429058
+radius = 2.5308905
 
 [node name="fire_slinger" type="CharacterBody2D" node_paths=PackedStringArray("animated_sprite_2d") groups=["enemy"]]
 collision_layer = 3
@@ -66,6 +71,7 @@ animated_sprite_2d = NodePath("AnimatedSprite2D")
 projectile_scene = ExtResource("2_utyy5")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+material = SubResource("ShaderMaterial_hi62u")
 sprite_frames = SubResource("SpriteFrames_beuir")
 animation = &"walk"
 frame_progress = 0.2779914

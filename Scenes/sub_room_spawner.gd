@@ -2,7 +2,7 @@ extends Node2D
 
 @export var treasure_room_scene: PackedScene
 @export var other_rooms_to_spawn: Array[PackedScene] 
-@export var spawn_area_polygon: Polygon2D 
+
 @export var nav_region: NavigationRegion2D
 @export_group("Player Spawn Protection")
 @export var player_spawn_marker: Marker2D 
@@ -13,7 +13,7 @@ extends Node2D
 @export var grid_size: Vector2 = Vector2(16, 16) 
 
 var occupied_areas: Array[Rect2] = []
-
+@onready var spawn_area_polygon = %RoomBoundary
 func _ready():
 	if spawn_area_polygon:
 		spawn_area_polygon.hide()
@@ -52,7 +52,10 @@ func spawn_sub_room(room_scene: PackedScene):
 	# 2. Look for the ReferenceRect we added
 	var bounds_node = room_instance.get_node_or_null("RoomBounds")
 	var room_size = Vector2.ZERO
-	
+	var global_points = PackedVector2Array()
+	for p in spawn_area_polygon.polygon:
+		# to_global converts the local point to the actual level position
+		global_points.append(spawn_area_polygon.to_global(p))
 	# 3. Read the size visually set by the designer!
 	if bounds_node and bounds_node is ReferenceRect:
 		room_size = bounds_node.size
@@ -68,34 +71,39 @@ func spawn_sub_room(room_scene: PackedScene):
 	var bounds = get_polygon_bounds(points)
 	
 	while attempt < max_attempts and not spawned:
+		# Pick a random spot within the global bounds
 		var random_x = randf_range(bounds.position.x, bounds.end.x - room_size.x)
 		var random_y = randf_range(bounds.position.y, bounds.end.y - room_size.y)
-		
-		# Snapping to your grid size (ensure grid_size is still exported at the top of your script!)
 		var candidate_pos = Vector2(random_x, random_y).snapped(grid_size)
 		
-		var top_left = candidate_pos
-		var top_right = candidate_pos + Vector2(room_size.x, 0)
-		var bottom_left = candidate_pos + Vector2(0, room_size.y)
-		var bottom_right = candidate_pos + room_size
+		# Define the room corners in Global Space
+		var corners = [
+			candidate_pos,
+			candidate_pos + Vector2(room_size.x, 0),
+			candidate_pos + Vector2(0, room_size.y),
+			candidate_pos + room_size
+		]
 		
-		if Geometry2D.is_point_in_polygon(top_left, points) and \
-		   Geometry2D.is_point_in_polygon(top_right, points) and \
-		   Geometry2D.is_point_in_polygon(bottom_left, points) and \
-		   Geometry2D.is_point_in_polygon(bottom_right, points):
-			
+		# Check corners against the GLOBAL polygon
+		var all_corners_inside = true
+		for corner in corners:
+			if not Geometry2D.is_point_in_polygon(corner, global_points):
+				all_corners_inside = false
+				break
+		
+		if all_corners_inside:
 			var candidate_rect = Rect2(candidate_pos, room_size)
 			var overlaps = false
-			
 			for occupied in occupied_areas:
 				if candidate_rect.intersects(occupied):
 					overlaps = true
 					break
 			
 			if not overlaps:
-				# We found a spot! Move our instance here and officially add it to the game.
-				room_instance.position = candidate_pos
-				add_child(room_instance)
+				# Use global_position for placement
+				room_instance.global_position = candidate_pos
+				# Use call_deferred to avoid the "busy" parent error
+				add_child.call_deferred(room_instance)
 				
 				occupied_areas.append(candidate_rect)
 				spawned = true
@@ -103,8 +111,7 @@ func spawn_sub_room(room_scene: PackedScene):
 		attempt += 1
 		
 	if not spawned:
-		push_warning("Failed to find a valid spot. Destroying the room.")
-		room_instance.queue_free() # Clean up the room if it couldn't find a place to exist
+		room_instance.queue_free()
 
 func get_polygon_bounds(points: PackedVector2Array) -> Rect2:
 	if points.is_empty(): return Rect2()

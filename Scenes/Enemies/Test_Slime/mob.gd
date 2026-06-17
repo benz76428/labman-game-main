@@ -7,15 +7,19 @@ extends CharacterBody2D
 @export var animated_sprite_2d: AnimatedSprite2D
 var can_attack: bool = true
 var current_health: int
+var flash_tween: Tween
 var anim_name = "walk_right"
 const DNA_DROP = preload("res://Scenes/xp/dna_drop.tscn") 
 const DAMAGE_NUMBER = preload("res://Scenes/ui/damage_number.tscn")
 @onready var player = get_tree().get_first_node_in_group("player")
 @onready var nav_agent: NavigationAgent2D = $NavigationAgent2D
+@onready var sprite = $AnimatedSprite2D 
 func _ready():
 	
 	animated_sprite_2d.play('walk_right')
 	current_health = max_health
+	if animated_sprite_2d.material:
+		animated_sprite_2d.material = animated_sprite_2d.material.duplicate()
 	if nav_agent:
 		nav_agent.path_desired_distance = 10.0
 		nav_agent.target_desired_distance = 20.0
@@ -61,7 +65,9 @@ func trigger_attack_cooldown() -> void:
 func take_damage(amount:float):
 	current_health -= amount
 	#%Slime.play_hurt()
-	
+	sprite.material.set_shader_parameter("flash_modifier", 1.0)
+	await get_tree().create_timer(0.05).timeout
+	sprite.material.set_shader_parameter("flash_modifier", 0.0)
 	var dmg_indicator = DAMAGE_NUMBER.instantiate()
 	# Add it to the main scene tree so it doesn't get deleted if the mob dies
 	get_tree().current_scene.add_child(dmg_indicator)

@@ -199,7 +199,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_reotu"]
-size = Vector2(10, 16)
+size = Vector2(7, 15)
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 script = ExtResource("1_l2atl")
@@ -218,6 +218,7 @@ animation = &"walk_right"
 autoplay = "idle_front"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(2, -1)
 shape = SubResource("RectangleShape2D_reotu")
 
 [node name="Gun" parent="." instance=ExtResource("4_fk5o5")]

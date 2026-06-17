@@ -20,14 +20,21 @@ func _on_physics_process(_delta: float) -> void:
 	
 	# Animation Logic
 	var anim_name = "walk_front"
-	if player.player_direction == Vector2.UP:
-		anim_name = "walk_back"
-	elif player.player_direction == Vector2.DOWN:
-		anim_name = "walk_front"
-	elif player.player_direction == Vector2.RIGHT:
-		anim_name = "walk_right"
-	elif player.player_direction == Vector2.LEFT:
-		anim_name = "walk_left"
+	if direction != Vector2.ZERO:
+		# Use absolute values to determine the 'Dominant Axis'
+		# This checks if you are moving more vertically or horizontally
+		if abs(direction.y) > abs(direction.x):
+			# More vertical movement
+			if direction.y < 0:
+				anim_name = "walk_back"
+			else:
+				anim_name = "walk_front"
+		else:
+			# More horizontal movement
+			if direction.x < 0:
+				anim_name = "walk_left"
+			else:
+				anim_name = "walk_right"
 	
 	animated_sprite_2d.play(anim_name)
 

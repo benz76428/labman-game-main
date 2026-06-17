@@ -7,7 +7,7 @@
 
 [sub_resource type="Curve2D" id="Curve2D_4ey1b"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, -182, -133, 0, 0, 0, 0, 2165, -145, 0, 0, 0, 0, 2109, 1297, 0, 0, 0, 0, -206, 1271, 0, 0, 0, 0, -182, -133)
+"points": PackedVector2Array(0, 0, 0, 0, -210.35846, -145.00002, 0, 0, 0, 0, 2165, -145, 0, 0, 0, 0, 2167.9055, 1288.9215, 0, 0, 0, 0, -204.54718, 1291.6143, 0, 0, 0, 0, -210.35846, -146.34642)
 }
 point_count = 5
 
@@ -30,13 +30,12 @@ autostart = true
 position = Vector2(961, 611)
 
 [node name="Path2D" type="Path2D" parent="Player"]
-position = Vector2(-639.20667, -386.30582)
-scale = Vector2(0.6883172, 0.74271846)
+position = Vector2(-366.54446, -206.79013)
+scale = Vector2(0.37296116, 0.35675526)
 curve = SubResource("Curve2D_4ey1b")
 
 [node name="PathFollow2D" type="PathFollow2D" parent="Player/Path2D"]
 unique_name_in_owner = true
-position = Vector2(-182, -133)
-rotation = -0.005112866
+position = Vector2(-210.35846, -145.00002)
 
 [connection signal="timeout" from="MobSpawner" to="." method="_on_mob_spawner_timeout"]
